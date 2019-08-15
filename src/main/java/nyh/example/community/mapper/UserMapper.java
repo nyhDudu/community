@@ -3,6 +3,8 @@ package nyh.example.community.mapper;
 import nyh.example.community.model.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface UserMapper {
@@ -11,5 +13,7 @@ public interface UserMapper {
 //    因为Interface方法默认public 所以public可以去掉
 //   public void insert(User user);
     void insert(User user);
+    @Select("select * from user where token=#{token}")
+    User findByToken(@Param("token") String token);
 }
 
