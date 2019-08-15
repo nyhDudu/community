@@ -27,11 +27,13 @@ public class GithubProvider {
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String string =response.body().string();
+            System.out.println("String"+string);
 //            access_token=64718ae74c92c65e846defa6ecc45091f2b934b2&scope=user&token_type=bearer
 //            取出64718ae74c92c65e846defa6ecc45091f2b934b2
             String[] split = string.split("&");
             String tokenstr=split[0];
             String token = string.split("&")[0].split("=")[1];
+            System.out.println(token);
             return token;
         } catch (IOException e) {
             e.printStackTrace();
@@ -52,8 +54,10 @@ public class GithubProvider {
         try{
             Response response = client.newCall(request).execute();
             String string =response.body().string();
+            System.out.println(string);
 //            把String的一个json对象自动转化解析成java的类对象
             GithubUser githubUser = JSON.parseObject(string, GithubUser.class);
+            System.out.println(githubUser);
             return githubUser;
         } catch(IOException e){
 
